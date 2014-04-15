@@ -1,0 +1,453 @@
+/**
+ * Tundra Core
+ * 
+ * @author		Chris Atkin
+ * @link		http://chrisatk.in
+ * @email		contact {at} chrisatk {dot} com
+ * 
+ * @file		tundra.core.css
+ * @version		1.0
+ * @date		10/09/2011
+ * 
+ * Copyright (c) 2010 Chris Atkin. All rights reserved
+ */
+ 
+*
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+html,
+body
+{
+	margin:0;
+	padding:0;
+	height:100%;
+	background-color: #f4f4f4;
+}
+
+body
+{
+	font: 14px "Lucida Grande", Lucida, Verdana, sans-serif;
+	position: relative;
+}
+
+.wrapper
+{
+	width: 90%;
+	margin: 0 auto;
+	min-width: 900px;
+}
+
+#super-container
+{
+	min-height:100%;
+	position:relative;
+}
+
+.clear
+{
+	clear: both;
+}
+
+noscript
+{
+	width: 300px;
+	margin: 0 auto;
+	margin-top: 100px;
+	text-align: center;
+	display: block;
+	padding: 20px;
+	background: #ffb9bb;
+	border: 2px solid #ff271b;
+	color: #51261c;
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+/* @group Bar */
+
+div#bar
+{
+	height: 20px;
+	background: black;
+	color: white;
+	padding: 5px;
+	border-bottom: 1px solid #2d2d2d;
+}
+
+div#bar div
+{
+	font-size: 10px;
+	padding-top: 2px;
+}
+
+div#bar-left
+{
+	float: left;
+	width: 50%;
+	color: gray;
+}
+
+div#bar-left strong
+{
+	color: white;
+}
+
+div#bar-right
+{
+	float: right;
+	width: 50%;
+	text-align: right;
+}
+
+div#bar-right span
+{
+	color: gray;
+}
+
+div#bar-right a
+{
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+div#bar-right a:hover
+{
+	text-decoration: underline;
+}
+
+/* @end */
+
+/* @group Header */
+
+div#header
+{
+	width: 100%;
+	height: 150px;
+	
+	background: black;
+	border-top: 1px solid #696969;
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+
+div#header input
+{
+	width: 98%;
+	font-size: 18px;
+	padding: 10px;
+	padding-right: -10px;
+	margin-top: 49px;
+	border: 1px solid black;
+	background: #3c3c3c;
+	background-image: -webkit-gradient(
+    	linear,
+    	left bottom,
+    	left top,
+    	color-stop(1, rgb(57,57,57)),
+    	color-stop(0, rgb(72,72,72))
+	);
+	background-image: -moz-linear-gradient(
+    	center bottom,
+    	rgb(57,57,57) 100%,
+    	rgb(72,72,72) 0%
+	);
+	color: silver;
+	border-radius: 8px;
+	outline: none;
+}
+
+/* @end */
+
+/* @group Content */
+
+div#content
+{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-bottom: 40px;
+}
+
+div#content-loading
+{
+	margin-top: 200px;
+	margin-bottom: 50px;
+	text-align: center;
+	font-size: 10px;
+}
+
+div#content-loading img
+{
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 10px;
+}
+
+div#_target ul
+{
+	float: left;
+	min-height: 100px;
+	list-style-type: none;
+}
+
+.notimoo{position:absolute;z-index:999;cursor:pointer;-moz-border-radius:10px;-webkit-border-radius:10px;padding:10px;border:3px;border-style:solid;border-color:#B2B2B2;background:#333;color:#FFF;}.notimoo .title{font-weight:bold;border-bottom:1px solid;}.notimoo .message{margin-top:2px;}.notimoo a{color:#FFF;}
+
+/* @group Tabs */
+
+div#tabs
+{
+	background: #fafafa 0%;
+	background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(1, rgb(243,243,243)),
+        color-stop(0, rgb(232,232,232))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(243,243,243) 100%,
+        rgb(232,232,232) 0%
+    );
+	border-top: 1px solid white;
+	border-bottom: 1px solid #cccccc;
+	height: 41px;
+}
+
+div#tabs span
+{
+	font-weight: bold;
+	font-size: 18px;
+	color: #464646;
+	margin-top: 8px;
+	display: block;
+}
+
+div#tabs ul
+{
+	list-style-type: none;
+}
+
+div#tabs li
+{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 19px;
+}
+
+div#tabs li a
+{
+	font-size: 12px;
+	background: white;
+	background-image: -webkit-gradient(
+    	linear,
+    	left bottom,
+    	left top,
+    	color-stop(0, rgb(241,241,241)),
+    	color-stop(1, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+    	center bottom,
+    	rgb(241,241,241) 0%,
+    	rgb(255,255,255) 100%
+	);
+	border: 1px solid #d2d2d2;
+	border-bottom: none;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-right: 5px;
+	color: #626262;
+	text-decoration: none;
+	padding: 5px 20px;
+}
+
+div#tabs li a:hover
+{
+	color: #383838;
+}
+
+div#tabs li a:active
+{
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+   		left top,
+    	color-stop(1, rgb(241,241,241)),
+    	color-stop(0, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+    	center bottom,
+    	rgb(241,241,241) 100%,
+    	rgb(255,255,255) 0%
+	);
+}
+
+div#tabs li#active
+{
+	margin-top: 16px;
+}
+
+div#tabs li#active a
+{
+	font-weight: bold;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+div#tabs li.rightside
+{
+	float: right;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group News */
+
+div.news
+{
+	color: #464646;
+}
+
+div.news h1
+{
+	border-bottom: 1px solid #515151;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	font-size: 18px;
+	color: #222;
+}
+
+div.news p
+{
+	font-size: 14px;
+	margin-bottom: 20px;
+	line-height: 30px;
+}
+
+div.news ul
+{
+	margin-left: 40px;
+	font-size: 14px;
+}
+
+div.news li
+{
+	line-height: 30px;
+	margin-bottom: 10px;
+}
+
+div.news li span.title
+{
+	font-weight: bold;
+	display: block;
+}
+
+div.news img.float-left
+{
+	float: left;
+	padding-right: 20px;	
+}
+
+div.news img.float-html
+{
+	float: left;
+	padding: 10px;
+}
+
+div.news a
+{
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+div.news a:hover
+{
+	text-decoration: underline;
+}
+
+/* @end */
+
+/* @group Facetip */
+
+.facetip {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.facetip-arrow-down {
+    position: absolute;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
+
+/* @end */
+
+/* @group Footer */
+
+div#footer
+{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	background: #ececec;
+	height: 40px;
+	font-size: 10px;
+	color: gray;
+	border-top: 1px solid #cdcdcd;
+	margin-bottom: -20px;
+}
+
+div#footer #footer-left
+{
+	float: left;
+	width: 50%;
+	padding-top: 13px;
+}
+
+div#footer #footer-right
+{
+	float: right;
+	width: 50%;
+	text-align: right;
+	padding-top: 13px;
+}
+
+div#footer #footer-right ul
+{
+	list-style-type: none;
+}
+
+div#footer #footer-right li
+{
+	display: inline;
+}
+
+div#footer #footer-right li a
+{
+	color: #757575;
+	text-decoration: none;
+	margin-left: 20px;
+}
+
+div#footer #footer-right li a:hover
+{
+	text-decoration: underline;
+}
+
+/* @end */

@@ -1,0 +1,50 @@
+table#settings
+{
+	width: 100%;
+}
+
+table#settings td.key
+{
+	width: 25%;
+}
+
+table#settings td.value
+{
+	width: 75%;
+}
+
+table#settings select
+{
+	width: 100%;
+	font-size: 16px;
+	padding: 20px;
+}
+
+table#settings input[type=submit]
+{
+	padding: 20px;
+	font-size: 18px;
+}
+
+table#themes
+{
+	width: 100%;
+	border: none;
+	border-collapse: collapse;
+}
+
+table#themes td
+{
+	padding: 10px;
+}
+
+table#themes img
+{
+	width: 100%;
+}
+
+table#themes tr.active
+{
+	background: silver;
+	
+}

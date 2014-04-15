@@ -1,0 +1,356 @@
+/* @override http://localhost/~chris/projects/tundra/assets/styles/dashboard.core.widget.css */
+
+div.tundrawidget
+{
+	text-align: left;
+	
+	width: 95%;
+	margin: 0 auto 20px;
+}
+
+div.tundrawidget .title-bar
+{
+	font-size: 12px;
+	background: #3c3c3c;
+	background-image: -webkit-gradient(
+    	linear,
+    	left bottom,
+    	left top,
+    	color-stop(1, rgb(57,57,57)),
+    	color-stop(0, rgb(72,72,72))
+	);
+	background-image: -moz-linear-gradient(
+    	center bottom,
+    	rgb(57,57,57) 100%,
+    	rgb(72,72,72) 0%
+	);
+	color: white;
+	padding: 10px;
+	padding-left: 15px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	text-shadow: #000 0 -1px 0;
+	box-shadow: 0px 2px 3px silver;
+}
+
+div.tundrawidget .title-bar a,
+div.tundrawidget .title-bar a:visited
+{
+	font-weight: normal;
+	color: white;
+	text-shadow: #000 0 -1px 0;
+}
+
+div.tundrawidget .title-container img
+{
+	position: relative;
+}
+
+div.tundrawidget .title-container a:hover
+{
+	color: white;
+	text-decoration: underline;
+}
+
+div.tundrawidget div.widget-title
+{
+	float: left;
+	width: 65%;
+	padding-top: 2px;
+}
+
+div.tundrawidget div.widget-refreshes
+{
+	text-align: right;
+	float: right;
+	width: 70px;
+	font-size: 9px;
+	opacity: 0.3;
+	padding-top: 3px;
+	padding-right: 5px;
+	font-weight: bold;
+}
+
+div.tundrawidget .widget-content
+{
+	border: 1px solid #474747;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	padding: 5px;
+	background: white;
+	box-shadow: 0px 2px 3px silver;
+	line-height: 20px;
+}
+
+div.tundrawidget .widget-content ul
+{
+	margin: 0px;
+	padding: 20px;
+	padding-top: 5px;
+	padding-bottom: 7px;
+	margin-left: 7px;
+}
+
+div.tundrawidget .widget-content li
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+div.tundrawidget .widget-content li a
+{
+	color: gray;
+	font-size: 12px;
+}
+
+div.tundrawidget .widget-content li a:visited
+{
+	color: silver;
+}
+
+div.tundrawidget .widget-loading
+{
+	margin: 0 auto;
+	text-align: center;
+	padding: 30px;
+	font-size: 10px;
+}
+
+div.tundrawidget .widget-loading img
+{
+	margin-top: 10px;
+}
+
+/* @group Widget Configuration */
+
+form.widgetform
+{
+	width: 95%;
+	font-size: 12px;
+	margin-left: 4px;
+}
+
+form.widgetform label
+{
+	display: block;
+}
+
+form.widgetform input[type=text]:focus
+{
+	outline-width: 0;
+	border: 1px solid #565656;
+}
+
+form.widgetform input[type=text]
+{
+	width: 99%;
+	border: 1px solid silver;
+	padding: 10px 0 10px 10px;
+	margin-bottom: 10px;
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+form.widgetform hr
+{
+	margin: 10px 0;
+	height: 1px;
+	border: 0px;
+	border-bottom: 1px solid gray;
+}
+
+form.widgetform input[type=submit]
+{
+    background: #393939 url('../art/auth.shine.png') repeat-x;
+    margin: 2px;
+    padding: 5px 10px 6px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border: none;
+    cursor: pointer;
+    margin-bottom: 7px;
+    width: 102%;
+    
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+form.widgetform input[type=submit]:hover
+{
+    background-image: none;
+}
+
+/* @end */
+
+/* @group TundraRssWidget */
+
+table.TundraRssWidget
+{
+	width: 100%;
+}
+
+table.TundraRssWidget td
+{
+	text-align: left;
+	vertical-align: top;
+	align: left;
+}
+
+div.TundraRssWidget a
+{
+	color: black;
+	text-align: left;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+div.TundraRssWidget a:hover
+{
+	color: #858585;
+	text-decoration: underline;
+}
+
+div.TundraRssWidget a:visited
+{
+	color: silver;
+}
+
+div.TundraRssWidget div.icon img
+{
+	margin-top: 5px;
+}
+
+div.TundraRssWidget div.summary
+{
+	font-size: 12px;
+	color: #484848;
+}
+
+div.TundraRssWidget div.summary a
+{
+	font-weight: normal;
+}
+
+div.TundraRssWidget div.summary img
+{
+	display: none;
+}
+
+div.TundraRssWidget div.image img
+{
+	float: right;
+	max-height: 100px;
+	max-width: 100px;
+	padding: 10px;
+}
+
+/* @end */
+
+/* @group TundraIframeWidget */
+
+div.TundraIframeWidget iframe
+{
+	width: 100%;
+	overflow: hidden;
+	border: none;
+	clear: none;
+	display: inline;
+}
+
+/* @end */
+
+/* @group TundraRedditBrowser */
+
+div.TundraRedditBrowser
+{
+	
+}
+
+/* @end */
+
+/* @group TundraBbcFeed */
+
+div.TundraBbcFeed div.header
+{
+	background-color: #990100;
+	background-image: -webkit-gradient(linear, left top, left bottom, to(rgb(153, 1, 0)), from(rgb(119, 1, 1)));
+	background-image: -webkit-linear-gradient(top, rgb(153, 1, 0), rgb(119, 1, 1));
+	background-image: -moz-linear-gradient(top, rgb(153, 1, 0), rgb(119, 1, 1));
+	background-image: -o-linear-gradient(top, rgb(153, 1, 0), rgb(119, 1, 1));
+	background-image: -ms-linear-gradient(top, rgb(153, 1, 0), rgb(119, 1, 1));
+	background-image: linear-gradient(top, rgb(153, 1, 0), rgb(119, 1, 1));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#990100', EndColorStr='#770101');
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 7px 5px 3px 7px;
+}
+
+table.TundraBbcFeed
+{
+	width: 100%;
+}
+
+table.TundraBbcFeed td
+{
+	text-align: left;
+	vertical-align: top;
+	align: left;
+}
+
+div.TundraBbcFeed a
+{
+	color: black;
+	text-align: left;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+div.TundraBbcFeed a:hover
+{
+	color: #858585;
+	text-decoration: underline;
+}
+
+div.TundraBbcFeed a:visited
+{
+	color: silver;
+}
+
+div.TundraBbcFeed div.icon img
+{
+	margin-top: 5px;
+}
+
+div.TundraBbcFeed div.summary
+{
+	font-size: 12px;
+	color: #484848;
+}
+
+div.TundraBbcFeed div.summary a
+{
+	font-weight: normal;
+}
+
+div.TundraBbcFeed div.summary img
+{
+	display: none;
+}
+
+div.TundraBbcFeed div.image img
+{
+	float: right;
+	max-height: 100px;
+	max-width: 100px;
+	padding: 10px;
+}
+
+
+/* @end */

@@ -1,0 +1,133 @@
+/* @override http://localhost/~chris/projects/tundra/assets/styles/auth.core.css */
+
+body
+{
+    background: white url(../art/welcome.background.gif) repeat-x;
+    font: 12px "Lucida Grande", Lucida, Verdana, sans-serif;
+    color: #484848;
+}
+
+div#wrapper
+{
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+img
+{
+    margin-bottom: 10px;
+}
+
+div#login
+{
+    background: white;
+    border: 1px solid #474747;
+    border-top: none;
+    border-radius: 6px;
+    box-shadow: 0px 2px 3px silver;
+    
+}
+
+div#header
+{
+    padding: 10px;
+    padding-left: 11px;
+    background-color: #393939;
+    background-image: -webkit-gradient(linear, left top, left bottom, to(rgb(57, 57, 57)), from(rgb(71, 71, 71)));
+    background-image: -webkit-linear-gradient(top, rgb(57, 57, 57), rgb(71, 71, 71));
+    background-image: -moz-linear-gradient(top, rgb(57, 57, 57), rgb(71, 71, 71));
+    background-image: -o-linear-gradient(top, rgb(57, 57, 57), rgb(71, 71, 71));
+    background-image: -ms-linear-gradient(top, rgb(57, 57, 57), rgb(71, 71, 71));
+    background-image: linear-gradient(top, rgb(57, 57, 57), rgb(71, 71, 71));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#393939', EndColorStr='#474747');
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+div#header a
+{
+    color: white;
+    text-shadow: #000 0 -1px 0;
+    text-decoration: none;
+}
+
+div#header a:hover
+{
+    text-decoration: underline;
+}
+
+table
+{
+    width: 100%;
+}
+
+table tr
+{
+	width: 100%;
+}
+
+table td
+{
+	width: 100%;
+}
+
+input[type=text], input[type=password]
+{
+    width: 100%;
+    border: 1px solid silver;
+    font-size: 16px;
+    padding: 5px;
+}
+
+input[type=submit]
+{
+    background: #393939 url('../art/auth.shine.png') repeat-x;
+    margin: 2px;
+    padding: 5px 10px 6px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border: none;
+    cursor: pointer;
+    width: 102%;
+    
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+input[type=submit]:hover
+{
+    background-image: none;
+}
+
+div#content
+{
+    padding: 5px;
+    width: 94%;
+}
+
+div#last-updated
+{
+    text-align: center;
+    font-size: 10px;
+    color: #9e9e9e;
+    margin-top: 10px;
+    line-height: 17px;
+}
+
+.error,
+.alert,
+.notice,
+.success,
+.info { padding: 0.8em; border: 2px solid #ddd; width: 95%; margin-left: 3px; margin-bottom: 10px; }
+
+.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.notice        { background: #fff6bf; color: #514721; border-color: #ffd324; }
+.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
+.error a, .alert a { color: #8a1f11; }
+.notice a          { color: #514721; }
+.success a         { color: #264409; }
+.info a            { color: #205791; }
