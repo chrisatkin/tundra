@@ -26,9 +26,11 @@
  * @category	Libraries
  * @link		http://codeigniter.com/user_guide/general/routing.html
  */
+#[\AllowDynamicProperties]
 class CI_Router {
 
 	var $config;
+	var $uri;
 	var $routes			= array();
 	var $error_routes	= array();
 	var $class			= '';

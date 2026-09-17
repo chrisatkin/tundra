@@ -26,8 +26,11 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/input.html
  */
+#[\AllowDynamicProperties]
 class CI_Input {
 
+	var $security;
+	var $uni;
 	var $ip_address				= FALSE;
 	var $user_agent				= FALSE;
 	var $_allow_get_array		= TRUE;

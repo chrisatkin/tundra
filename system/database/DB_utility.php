@@ -22,6 +22,7 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
+#[\AllowDynamicProperties]
 class CI_DB_utility extends CI_DB_forge {
 
 	var $db;
@@ -33,13 +34,18 @@ class CI_DB_utility extends CI_DB_forge {
 	 * Grabs the CI super object instance so we can access it.
 	 *
 	 */
-	function CI_DB_utility()
+	function __construct()
 	{
 		// Assign the main database object to $this->db
 		$CI =& get_instance();
 		$this->db =& $CI->db;
 
 		log_message('debug', "Database Utility Class Initialized");
+	}
+
+	function CI_DB_utility()
+	{
+		$this->__construct();
 	}
 
 	// --------------------------------------------------------------------

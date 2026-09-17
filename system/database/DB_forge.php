@@ -22,6 +22,7 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
+#[\AllowDynamicProperties]
 class CI_DB_forge {
 
 	var $fields			= array();
@@ -35,12 +36,17 @@ class CI_DB_forge {
 	 * Grabs the CI super object instance so we can access it.
 	 *
 	 */
-	function CI_DB_forge()
+	function __construct()
 	{
 		// Assign the main database object to $this->db
 		$CI =& get_instance();
 		$this->db =& $CI->db;
 		log_message('debug', "Database Forge Class Initialized");
+	}
+
+	function CI_DB_forge()
+	{
+		$this->__construct();
 	}
 
 	// --------------------------------------------------------------------

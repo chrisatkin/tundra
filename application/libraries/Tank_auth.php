@@ -16,8 +16,10 @@ define('STATUS_NOT_ACTIVATED', '0');
  * @based on	DX Auth by Dexcell (http://dexcell.shinsengumiteam.com/dx_auth)
  * @license		MIT License Copyright (c) 2008 Erick Hartanto
  */
+#[\AllowDynamicProperties]
 class Tank_auth
 {
+	public $ci;
 	private $error = array();
 
 	function __construct()

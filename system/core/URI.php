@@ -26,8 +26,10 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/uri.html
  */
+#[\AllowDynamicProperties]
 class CI_URI {
 
+	var $config;
 	var	$keyval			= array();
 	var $uri_string;
 	var $segments		= array();

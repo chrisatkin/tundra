@@ -15,8 +15,8 @@
 |
 */
 $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
-$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$config['base_url'] .= "://".(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost');
+$config['base_url'] .= isset($_SERVER['SCRIPT_NAME']) ? str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']) : '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -368,13 +368,14 @@ $config['proxy_ips'] = '';
 | for base controllers and some third-party libraries.
 |
 */
-function __autoload($class)
-{
- if(strpos($class, 'CI_') !== 0)
- {
-  @include_once( APPPATH . 'core/'. $class . EXT );
- }
-}
+spl_autoload_register(function ($class) {
+	if (strpos($class, 'CI_') !== 0) {
+		$file = APPPATH . 'core/' . $class . (defined('EXT') ? EXT : '.php');
+		if (file_exists($file)) {
+			include_once($file);
+		}
+	}
+});
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

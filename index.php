@@ -33,7 +33,11 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
-			error_reporting(E_ALL);
+			// E_DEPRECATED is excluded because the bundled Zend Framework 1
+			// libraries (system/Zend) predate PHP 8 and trigger it constantly;
+			// it's noise about the vendored library's own PHP version support,
+			// not an actionable bug in this app's code.
+			error_reporting(E_ALL & ~E_DEPRECATED);
 		break;
 	
 		case 'testing':
