@@ -2,9 +2,11 @@
 
 namespace Config;
 
+use App\Libraries\AuthMailer;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 use CodeIgniter\HotReloader\HotReloader;
+use CodeIgniter\Shield\Entities\User;
 
 /*
  * --------------------------------------------------------------------
@@ -22,6 +24,18 @@ use CodeIgniter\HotReloader\HotReloader;
  * Example:
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
+
+// Ported from application/controllers/auth.php::register(): when
+// email_activation is off (it always is here -- see app/Config/Auth.php's
+// $actions), the old app auto-activated the new user and sent a "welcome"
+// email with their login details.
+Events::on('register', static function (User $user): void {
+    (new AuthMailer())->send('welcome', $user->email, [
+        'site_name' => 'Tundra',
+        'username'  => $user->username ?? '',
+        'email'     => $user->email,
+    ]);
+});
 
 Events::on('pre_system', static function (): void {
     if (ENVIRONMENT !== 'testing') {

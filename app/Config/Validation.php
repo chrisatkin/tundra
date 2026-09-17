@@ -38,6 +38,24 @@ class Validation extends BaseConfig
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
 
+    /**
+     * Overrides Shield's default login rules (which validate an `email`
+     * field) since Tank Auth logged in by username only
+     * (application/config/tank_auth.php: login_by_username = TRUE,
+     * login_by_email = FALSE). Read by CodeIgniter\Shield\Validation\
+     * ValidationRules::getLoginRules() via setting('Validation.login').
+     */
+    public array $login = [
+        'username' => [
+            'label' => 'Auth.username',
+            'rules' => ['required'],
+        ],
+        'password' => [
+            'label' => 'Auth.password',
+            'rules' => ['required'],
+        ],
+    ];
+
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------

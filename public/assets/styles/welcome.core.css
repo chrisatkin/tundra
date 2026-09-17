@@ -1,0 +1,199 @@
+/* @override http://localhost/~chris/projects/tundra/assets/styles/welcome.core.css */
+
+*
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+body
+{
+	font: 14px/20px "Lucida Grande", Lucida, Verdana, sans-serif;
+	background: white url('../art/welcome.background.gif') repeat-x;
+}
+
+div.clear
+{
+	clear: both;
+}
+
+div#header-left
+{
+	float: left;
+	width: 40%;	
+}
+
+div#header-right
+{
+	float: right;
+	width: 40%;
+	text-align: right;
+}
+
+div#header-right ul
+{
+	list-style-type: none;
+	margin-top: 15px;
+}
+
+div#header-right li
+{
+	display: inline;
+	margin-left: 20px;
+}
+
+div#header-right li a
+{
+	background-color: #ffffff;
+	background-image: -webkit-gradient(linear, left top, left bottom, to(rgb(255, 255, 255)), from(rgb(232, 232, 232)));
+	background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(232, 232, 232));
+	background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(232, 232, 232));
+	background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(232, 232, 232));
+	background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(232, 232, 232));
+	background-image: linear-gradient(top, rgb(255, 255, 255), rgb(232, 232, 232));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#e8e8e8');
+	
+	padding: 10px 14px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    
+    color: black;
+    text-decoration: none;
+	font-weight: bold;
+}
+
+div#header-right li a:hover
+{	
+	background-color: #e8e8e8;
+	background-image: -webkit-gradient(linear, left top, left bottom, to(rgb(232, 232, 232)), from(rgb(255, 255, 255)));
+	background-image: -webkit-linear-gradient(top, rgb(232, 232, 232), rgb(255, 255, 255));
+	background-image: -moz-linear-gradient(top, rgb(232, 232, 232), rgb(255, 255, 255));
+	background-image: -o-linear-gradient(top, rgb(232, 232, 232), rgb(255, 255, 255));
+	background-image: -ms-linear-gradient(top, rgb(232, 232, 232), rgb(255, 255, 255));
+	background-image: linear-gradient(top, rgb(232, 232, 232), rgb(255, 255, 255));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#e8e8e8', EndColorStr='#ffffff');
+}
+
+div#wrapper
+{
+	margin: 0 auto;
+	width: 1000px;
+	padding: 40px;
+}
+
+div#hero
+{
+	margin-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 40px;
+	border-bottom: 1px solid silver;
+	text-align: center;
+}
+
+div#summary
+{
+	color: gray;
+	font-size: 22px;
+	text-align: center;
+	padding-bottom: 40px;
+	margin-bottom: 40px;
+	border-bottom: 1px solid silver;
+}
+
+div#summary p
+{
+	width: 80%;
+	margin: 0 auto;
+	line-height: 40px;
+}
+
+/* @group Hero Areas */
+
+div.hero-area
+{
+	margin-bottom: 30px;
+}
+
+div.hero-area div.image img
+{
+	padding-bottom: 10px;
+}
+
+div.hero-area.left-hero img
+{
+	padding-right: 20px;
+	float: left;
+}
+
+div.hero-area.right-hero img
+{
+	float: right;
+	padding-left: 20px;
+}
+
+div.hero-area span.title
+{
+	font-size: 16px;
+	display: block;
+	padding-bottom: 5px;
+}
+
+div.hero-area span.text
+{
+	line-height: 25px;
+	color: #646464;
+}
+
+/* @end */
+
+/* @group Footer */
+
+div#footer
+{
+	font-size: 12px;
+	border-top: 1px solid silver;
+	padding-top: 30px;
+}
+
+div#footer div#left-footer
+{
+	float: left;
+	width: 30%;
+	font-weight: bold;
+}
+
+div#footer div#right-footer
+{
+	float: right;
+	text-align: right;
+	width: 60%;
+}
+
+div#footer div#right-footer ul
+{
+	list-style-type: none;
+}
+
+div#footer div#right-footer li
+{
+	display: inline;
+	margin-left: 30px;
+}
+
+div#footer div#right-footer li a
+{
+	color: #6e6e6e;
+	text-decoration: none;
+}
+
+div#footer div#right-footer li a:hover
+{
+	text-decoration: underline;
+}
+
+/* @end */
+

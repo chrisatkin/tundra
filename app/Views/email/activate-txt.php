@@ -1,0 +1,21 @@
+<?php // See app/Views/email/activate-html.php -- not currently wired up. ?>
+Welcome to <?php echo $site_name; ?>,
+
+Thanks for joining <?php echo $site_name; ?>. We listed your sign in details below, make sure you keep them safe.
+To verify your email address, please follow this link:
+
+<?php echo site_url('auth/login'); ?>
+
+<?php if (isset($activation_period)) { ?>
+Please verify your email within <?php echo $activation_period; ?> hours, otherwise your registration will become invalid and you will have to register again.
+<?php } ?>
+<?php if (strlen($username ?? '') > 0) { ?>
+
+Your username: <?php echo $username; ?>
+<?php } ?>
+
+Your email address: <?php echo $email; ?>
+
+
+Have fun!
+The <?php echo $site_name; ?> Team

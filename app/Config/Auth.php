@@ -45,18 +45,14 @@ class Auth extends ShieldAuth
      * View files
      * --------------------------------------------------------------------
      */
+    // Ported from the CI2 app's application/views/auth/*.php -- same markup,
+    // wired to Shield's controllers instead of Tank Auth.
     public array $views = [
-        'login'                       => '\CodeIgniter\Shield\Views\login',
-        'register'                    => '\CodeIgniter\Shield\Views\register',
-        'layout'                      => '\CodeIgniter\Shield\Views\layout',
-        'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
-        'action_email_2fa_verify'     => '\CodeIgniter\Shield\Views\email_2fa_verify',
-        'action_email_2fa_email'      => '\CodeIgniter\Shield\Views\Email\email_2fa_email',
-        'action_email_activate_show'  => '\CodeIgniter\Shield\Views\email_activate_show',
-        'action_email_activate_email' => '\CodeIgniter\Shield\Views\Email\email_activate_email',
-        'magic-link-login'            => '\CodeIgniter\Shield\Views\magic_link_form',
-        'magic-link-message'          => '\CodeIgniter\Shield\Views\magic_link_message',
-        'magic-link-email'            => '\CodeIgniter\Shield\Views\Email\magic_link_email',
+        'login'               => 'auth/login_form',
+        'register'            => 'auth/register_form',
+        'magic-link-login'    => 'auth/forgot_password_form',
+        'magic-link-message'  => 'auth/general_message',
+        'magic-link-email'    => 'email/forgot_password-html',
     ];
 
     /**
@@ -190,8 +186,11 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      * Specifies the amount of time, in seconds, that a magic link is valid.
      * You can use Time Constants or any desired number.
+     *
+     * This is Shield's replacement for Tank Auth's forgot/reset-password flow
+     * (application/config/tank_auth.php's forgot_password_expire was 15 minutes).
      */
-    public int $magicLinkLifetime = HOUR;
+    public int $magicLinkLifetime = 15 * MINUTE;
 
     /**
      * --------------------------------------------------------------------
@@ -210,8 +209,9 @@ class Auth extends ShieldAuth
     public array $sessionConfig = [
         'field'              => 'user',
         'allowRemembering'   => true,
-        'rememberCookieName' => 'remember',
-        'rememberLength'     => 30 * DAY,
+        // Matches Tank Auth's autologin_cookie_name/_life (application/config/tank_auth.php).
+        'rememberCookieName' => 'tundra_autologin',
+        'rememberLength'     => 62 * DAY,
     ];
 
     /**
@@ -227,7 +227,8 @@ class Auth extends ShieldAuth
         'label' => 'Auth.username',
         'rules' => [
             'required',
-            'max_length[30]',
+            // Matches Tank Auth's username_min_length/_max_length (application/config/tank_auth.php).
+            'max_length[20]',
             'min_length[3]',
             'regex_match[/\A[a-zA-Z0-9\.]+\z/]',
         ],
@@ -284,9 +285,9 @@ class Auth extends ShieldAuth
      * --------------------------------------------------------------------
      * Fields that are available to be used as credentials for login.
      */
+    // Tank Auth had login_by_username = TRUE, login_by_email = FALSE.
     public array $validFields = [
-        'email',
-        // 'username',
+        'username',
     ];
 
     /**
