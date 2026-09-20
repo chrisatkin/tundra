@@ -187,7 +187,17 @@ class App extends BaseConfig
      *
      * @var array<string, string>
      */
-    public array $proxyIPs = [];
+    // Trusts the EKS cluster's VPC CIDR (confirmed via `kubectl get nodes -o wide`:
+    // node internal IPs are 10.0.1.x/10.0.2.x). The ALB Ingress
+    // (clusters/tundra/tundra-app/ingress.yaml, target-type: ip) connects to
+    // pods directly from within this same VPC and always sets
+    // X-Forwarded-For with the real client IP -- without this, every
+    // request looks like it comes from the ALB's own address, so Shield's
+    // AuthRates login filter (10 req/min per IP) throttles ALL real users
+    // as if they were one, producing 429s that never happen locally.
+    public array $proxyIPs = [
+        '10.0.0.0/16' => 'X-Forwarded-For',
+    ];
 
     /**
      * --------------------------------------------------------------------------
