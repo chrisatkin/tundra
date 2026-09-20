@@ -47,7 +47,13 @@ class App extends BaseConfig
      * something else. If you have configured your web server to remove this file
      * from your site URIs, set this variable to an empty string.
      */
-    public string $indexPage = 'index.php';
+    // Empty because docker/nginx.conf's try_files already routes every URL
+    // to index.php internally regardless of what's in the path (and
+    // uriProtocol = 'REQUEST_URI' below means CI4 parses routes from the
+    // real URL, not from PATH_INFO after index.php) -- so this only
+    // affects the URLs CI4 itself generates (site_url(), redirect(),
+    // anchor(), etc.), not routing.
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------

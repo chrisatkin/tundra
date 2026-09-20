@@ -14,7 +14,7 @@ spec:
       serviceAccountName: tundra-app   # claims the IRSA identity from Module 9 — this is what lets the pod actually call Secrets Manager
       containers:
         - name: tundra-app
-          image: 717189564438.dkr.ecr.us-east-1.amazonaws.com/tundra-app:v0.4.2
+          image: 717189564438.dkr.ecr.us-east-1.amazonaws.com/tundra-app:v0.4.3
           ports:
             - containerPort: 80   # adjust to whatever your app actually listens on
           env:
