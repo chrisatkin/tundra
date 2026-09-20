@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tundra-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: tundra-app }
+  template:
+    metadata:
+      labels: { app: tundra-app }
+    spec:
+      serviceAccountName: tundra-app   # claims the IRSA identity from Module 9 — this is what lets the pod actually call Secrets Manager
+      containers:
+        - name: tundra-app
+          image: 717189564438.dkr.ecr.us-east-1.amazonaws.com/tundra-app:v0.1.0
+          ports:
+            - containerPort: 8080   # adjust to whatever your app actually listens on
+          envFrom:
+            - configMapRef:
+                name: tundra-db-config       # DB_HOST, DB_PORT, DB_NAME — not sensitive
+            - secretRef:
+                name: tundra-db-credentials  # DB_USERNAME, DB_PASSWORD — synced by the CSI driver at pod startup, never by Terraform
+          volumeMounts:
+            - name: db-secrets
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits:   { memory: "128Mi" }
+      volumes:
+        - name: db-secrets
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: tundra-db-secrets
+      # The volume mount above is required for the secretObjects sync to
+      # activate at all — even though this app only reads the env vars,
+      # not the mounted files. That's a real quirk of the CSI driver, not
+      # a mistake: the mount is what triggers the driver to run per-pod.
