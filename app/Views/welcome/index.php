@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
-		<title>Welcome to Tundra</title>
+		<title>Welcome to Tundra <?php echo env('APP_URL') ?></title>
 		<?php echo get_style('welcome.core.css'); ?>
 	</head>
 
