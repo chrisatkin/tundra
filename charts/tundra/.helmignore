@@ -1,0 +1,4 @@
+.git/
+.gitignore
+*.secret.yaml
+values.local.yaml

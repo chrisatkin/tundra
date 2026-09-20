@@ -1,0 +1,74 @@
+# Nothing under `secrets:` below should ever be set to a real value in this
+# file. Override it with `--set`, `-f values.secret.yaml` (untracked --
+# see .gitignore/.helmignore), or your own External Secrets/Sealed
+# Secrets setup once your course's cluster has one.
+
+replicaCount: 1
+
+image:
+  repository: ""  # e.g. <account>.dkr.ecr.<region>.amazonaws.com/tundra
+  tag: ""         # e.g. a commit SHA or semver tag pushed to that repo
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 75
+
+ingress:
+  enabled: false
+  className: ""   # e.g. "alb" once your course's ingress controller is installed
+  annotations: {}
+    # alb.ingress.kubernetes.io/scheme: internet-facing
+    # alb.ingress.kubernetes.io/target-type: ip
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:...
+  host: ""        # e.g. tundra.example.com
+  tls: false
+
+# Non-secret application config -> ConfigMap. Maps 1:1 onto CI4's .env-style
+# dotted config keys (see app/Config/App.php, Database.php, Session.php,
+# Cache.php) -- these are just env vars the Deployment injects, no code
+# changes needed to consume them.
+config:
+  environment: production
+  baseURL: ""              # e.g. https://tundra.example.com/
+  database:
+    hostname: ""            # RDS endpoint
+    name: Tundra_ci4
+    port: 3306
+    # Verify the server cert against AWS's RDS CA bundle, baked into the
+    # image at this path (see Dockerfile, docker/rds-global-bundle.pem).
+    # app/Config/Database.php's code default enables TLS everywhere but
+    # leaves verification off (needed for docker-compose's self-signed
+    # local MySQL) -- this chart is only ever pointed at RDS, so it turns
+    # verification on.
+    sslVerify: true
+    sslCA: /etc/ssl/rds/global-bundle.pem
+  session:
+    driver: "CodeIgniter\\Session\\Handlers\\RedisHandler"
+    cookieName: tundra_session
+  cache:
+    handler: redis
+  redis:
+    host: ""                 # ElastiCache endpoint
+    port: 6379
+
+# Secret-sourced env vars -> Secret. Leave these blank here; override at
+# install time. See the comment at the top of this file.
+secrets:
+  databaseUsername: ""
+  databasePassword: ""
+  encryptionKey: ""          # 'hex2bin:...' format, see app/Config/Encryption
+  redisPassword: ""

@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+env
+charts/
+tests/
+phpunit.dist.xml
+writable/cache/*
+writable/session/*
+writable/logs/*
+writable/debugbar/*
+!writable/cache/index.html
+!writable/session/index.html
+!writable/logs/index.html
+!writable/debugbar/index.html
+vendor/

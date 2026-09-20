@@ -16,6 +16,11 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
+    // CI4 4.4.0 removed baseURL auto-detection from an empty string (security
+    // fix for host-header trust issues), so on 4.7 leaving this blank throws
+    // a ConfigException instead of detecting the host like the old CI2
+    // config.php did. Set explicitly for the MAMP dev setup. NOTE: the
+    // app.baseURL value in .env overrides this default -- keep both in sync.
     public string $baseURL = 'http://localhost:8080/';
 
     /**

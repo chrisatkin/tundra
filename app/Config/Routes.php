@@ -5,11 +5,40 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 
 // Old application/config/routes.php had `default_controller = dashboard`,
-// but Dashboard isn't ported yet (Phase 5) -- Welcome is the CI2 app's
-// logged-out landing page and stands in for `/` until then.
+// with Dashboard itself (via TN_AuthenticatedController) redirecting to
+// `welcome` when logged out. `/` is kept pointed at Welcome::index
+// directly instead -- logged-out visitors land on the marketing page
+// without a redirect round-trip, and logged-in users reach the dashboard
+// via the `login` redirect below rather than through `/`.
 $routes->get('/', 'Welcome::index');
 $routes->get('welcome', 'Welcome::index');
 $routes->get('welcome/register', 'Welcome::register');
+
+// Kubernetes liveness/readiness probes -- unauthenticated, kubelet can't log in.
+$routes->get('healthz', 'Health::live');
+$routes->get('healthz/ready', 'Health::ready');
+
+// Dashboard (application/controllers/dashboard.php) + its widget AJAX
+// backend (application/controllers/helper.php). `dashboard/(:any)` matches
+// the old CI2 routes.php remap of the same shape.
+$routes->group('', ['filter' => 'session'], static function (RouteCollection $routes): void {
+    $routes->get('dashboard', 'Dashboard::index');
+    $routes->get('dashboard/(:any)', 'Dashboard::tab/$1');
+
+    $routes->get('helper/script/(:any)', 'Helper::script/$1');
+    $routes->get('helper/get_page_configuration/(:any)', 'Helper::getPageConfiguration/$1');
+    $routes->post('helper/set_widget_order', 'Helper::setWidgetOrder');
+    $routes->get('helper/get_widget_html/(:any)', 'Helper::getWidgetHtml/$1');
+    $routes->match(['GET', 'POST'], 'helper/widget_configuration', 'Helper::widgetConfiguration');
+    $routes->get('helper/widget_configuration/(:num)', 'Helper::widgetConfiguration/$1');
+    $routes->get('helper/rss_proxy', 'Helper::rssProxy');
+    $routes->get('helper/json_proxy', 'Helper::jsonProxy');
+
+    // Settings (application/controllers/settings.php) and News
+    // (application/controllers/news.php).
+    $routes->match(['GET', 'POST'], 'settings', 'Settings::index');
+    $routes->get('news', 'News::index');
+});
 
 // Shield's own login/register/logout/magic-link routes, kept under an
 // `auth/` prefix to match the old Tank-Auth-backed URLs

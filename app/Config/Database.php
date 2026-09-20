@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
+        'username'     => 'root',
+        'password'     => 'root',
+        'database'     => 'Tundra',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
@@ -37,11 +37,19 @@ class Database extends Config
         'charset'      => 'utf8mb4',
         'DBCollat'     => 'utf8mb4_general_ci',
         'swapPre'      => '',
-        'encrypt'      => false,
+        // Must stay an array, not a bool -- CI4's MySQLi driver only turns on
+        // MYSQLI_CLIENT_SSL when is_array($encrypt) is true (see
+        // vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php),
+        // so a flat `database.default.encrypt=true` env var would silently do
+        // nothing. This turns TLS on everywhere (MySQL 8's official image
+        // auto-generates a self-signed cert, so this works against the local
+        // docker-compose MySQL too) without verifying the server certificate.
+        // charts/tundra sets ssl_ca/ssl_verify via env vars for RDS.
+        'encrypt'      => ['ssl_verify' => false],
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
-        'port'         => 3306,
+        'port'         => 8889,
         'numberNative' => false,
         'foundRows'    => false,
         'dateFormat'   => [

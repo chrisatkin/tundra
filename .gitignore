@@ -124,3 +124,8 @@ _modules/*
 
 /results/
 /phpunit.xml
+
+# Local Helm values with real secrets, for testing charts/tundra/ --
+# never commit actual DB/Redis/encryption-key values.
+charts/**/values.*.secret.yaml
+charts/**/values.local.yaml

@@ -3,6 +3,7 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Log\Handlers\ErrorlogHandler;
 use CodeIgniter\Log\Handlers\FileHandler;
 use CodeIgniter\Log\Handlers\HandlerInterface;
 
@@ -76,76 +77,43 @@ class Logger extends BaseConfig
      *
      * @var array<class-string<HandlerInterface>, array<string, int|list<string>|string>>
      */
-    public array $handlers = [
-        /*
-         * --------------------------------------------------------------------
-         * File Handler
-         * --------------------------------------------------------------------
-         */
-        FileHandler::class => [
-            // The log levels that this handler will handle.
-            'handles' => [
-                'critical',
-                'alert',
-                'emergency',
-                'debug',
-                'error',
-                'info',
-                'notice',
-                'warning',
-            ],
+    public array $handlers = [];
 
-            /*
-             * The default filename extension for log files.
-             * An extension of 'php' allows for protecting the log files via basic
-             * scripting, when they are to be stored under a publicly accessible directory.
-             *
-             * NOTE: Leaving it blank will default to 'log'.
-             */
-            'fileExtension' => '',
-
-            /*
-             * The file system permissions to be applied on newly created log files.
-             *
-             * IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
-             * integer notation (i.e. 0700, 0644, etc.)
-             */
-            'filePermissions' => 0644,
-
-            /*
-             * Logging Directory Path
-             *
-             * By default, logs are written to WRITEPATH . 'logs/'
-             * Specify a different destination here, if desired.
-             */
-            'path' => '',
-        ],
-
-        /*
-         * The ChromeLoggerHandler requires the use of the Chrome web browser
-         * and the ChromeLogger extension. Uncomment this block to use it.
-         */
-        // 'CodeIgniter\Log\Handlers\ChromeLoggerHandler' => [
-        //     /*
-        //      * The log levels that this handler will handle.
-        //      */
-        //     'handles' => ['critical', 'alert', 'emergency', 'debug',
-        //                   'error', 'info', 'notice', 'warning'],
-        // ],
-
-        /*
-         * The ErrorlogHandler writes the logs to PHP's native `error_log()` function.
-         * Uncomment this block to use it.
-         */
-        // 'CodeIgniter\Log\Handlers\ErrorlogHandler' => [
-        //     /* The log levels this handler can handle. */
-        //     'handles' => ['critical', 'alert', 'emergency', 'debug', 'error', 'info', 'notice', 'warning'],
-        //
-        //     /*
-        //     * The message type where the error should go. Can be 0 or 4, or use the
-        //     * class constants: `ErrorlogHandler::TYPE_OS` (0) or `ErrorlogHandler::TYPE_SAPI` (4)
-        //     */
-        //     'messageType' => 0,
-        // ],
+    private const HANDLED_LEVELS = [
+        'critical',
+        'alert',
+        'emergency',
+        'debug',
+        'error',
+        'info',
+        'notice',
+        'warning',
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        // In production (containers), route logs to PHP's own error_log()
+        // (messageType 4 = SAPI logging handler) instead of a file --
+        // FileHandler always appends a date-based filename to its path
+        // (WRITEPATH . 'logs/log-YYYY-MM-DD.log'), so it can't stream to
+        // php://stderr. The Docker image points PHP-FPM's error_log at
+        // stderr, so this is what gets these messages into `kubectl logs`.
+        $this->handlers = ENVIRONMENT === 'production'
+            ? [
+                ErrorlogHandler::class => [
+                    'handles'     => self::HANDLED_LEVELS,
+                    'messageType' => ErrorlogHandler::TYPE_SAPI,
+                ],
+            ]
+            : [
+                FileHandler::class => [
+                    'handles'        => self::HANDLED_LEVELS,
+                    'fileExtension'  => '',
+                    'filePermissions' => 0644,
+                    'path'           => '',
+                ],
+            ];
+    }
 }

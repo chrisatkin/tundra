@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "tundra.fullname" . }}-migrate-{{ .Release.Revision }}
+  labels:
+    {{- include "tundra.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        {{- include "tundra.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # Runs both this app's own migrations and Shield's bundled ones
+          # (--all pulls in migrations from vendor namespaces too). Seeding
+          # (TundraSeeder, requires a pre-existing Shield user) is
+          # deliberately not run here -- create the user once with
+          # `kubectl exec <pod> -- php spark shield:user create`, then run
+          # the seeder by hand the same way.
+          command: ["php", "spark", "migrate", "--all"]
+          workingDir: /var/www/html
+          env:
+            {{- include "tundra.env" . | nindent 12 }}

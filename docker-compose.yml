@@ -1,0 +1,42 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      # CI4's dotenv loader calls getenv($name, true) (local-only), which
+      # doesn't see env vars Docker injects into the process environment --
+      # so without this, it treats them as unset and overwrites them from
+      # the bind-mounted .env (tuned for host-side MAMP, wrong values for
+      # the mysql/redis service names below). Masking it out means the
+      # `environment:` block below is the only source of truth in here.
+      - /dev/null:/var/www/html/.env:ro
+    environment:
+      CI_ENVIRONMENT: development
+      app.baseURL: "http://localhost:8080/"
+      database.default.hostname: mysql
+      database.default.port: "3306"
+      database.default.database: Tundra_ci4
+      database.default.username: root
+      database.default.password: root
+      encryption.key: "hex2bin:672b6dc9f9df1f2d94edf7a1867115b0cf56eb91bc7e509301c6e867aacc018d"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: Tundra_ci4
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql-data:
