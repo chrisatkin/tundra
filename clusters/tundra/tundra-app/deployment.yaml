@@ -17,6 +17,9 @@ spec:
           image: 717189564438.dkr.ecr.us-east-1.amazonaws.com/tundra-app:v0.1.0
           ports:
             - containerPort: 80   # adjust to whatever your app actually listens on
+          env:
+            - name: APP_URL
+            value: "https://gotundra.net"
           envFrom:
             - configMapRef:
                 name: tundra-db-config       # DB_HOST, DB_PORT, DB_NAME — not sensitive
