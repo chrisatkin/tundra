@@ -23,7 +23,7 @@ class App extends BaseConfig
     // a ConfigException instead of detecting the host like the old CI2
     // config.php did. Set explicitly for the MAMP dev setup. NOTE: the
     // app.baseURL value in .env overrides this default -- keep both in sync.
-    public string $baseURL = 'http://localhost:8080/';
+    public string $baseURL = env('APP_URL');
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -206,13 +206,4 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        if ($url = env('APP_URL')) {
-            $this->baseURL = rtrim($url, '/') . '/';
-        }
-    }
 }
