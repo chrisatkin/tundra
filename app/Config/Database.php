@@ -208,5 +208,13 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
+
+        if (ENVIRONMENT === 'production') {
+            $this->default['hostname'] = env('DB_HOST');
+            $this->default['username'] = env('DB_USERNAME');
+            $this->default['password'] = env('DB_PASSWORD');
+            $this->default['database'] = env('DB_NAME');
+            $this->default['port']     = (int) env('DB_PORT', 3306);
+        }
     }
 }
