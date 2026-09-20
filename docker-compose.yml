@@ -21,6 +21,12 @@ services:
       database.default.username: root
       database.default.password: root
       encryption.key: "hex2bin:672b6dc9f9df1f2d94edf7a1867115b0cf56eb91bc7e509301c6e867aacc018d"
+      # DB-backed sessions (app/Database/Migrations/..._CreateSessionsTable.php)
+      # instead of the file handler, so local dev matches how production now
+      # runs (multiple replicas, no shared disk for session files).
+      session.driver: "CodeIgniter\\Session\\Handlers\\Database\\MySQLiHandler"
+      session.savePath: ci_sessions
+      session.DBGroup: default
     depends_on:
       mysql:
         condition: service_healthy

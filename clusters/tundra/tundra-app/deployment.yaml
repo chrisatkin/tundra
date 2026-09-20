@@ -14,12 +14,24 @@ spec:
       serviceAccountName: tundra-app   # claims the IRSA identity from Module 9 — this is what lets the pod actually call Secrets Manager
       containers:
         - name: tundra-app
-          image: 717189564438.dkr.ecr.us-east-1.amazonaws.com/tundra-app:v0.4.1
+          image: 717189564438.dkr.ecr.us-east-1.amazonaws.com/tundra-app:v0.4.2
           ports:
             - containerPort: 80   # adjust to whatever your app actually listens on
           env:
             - name: APP_URL
               value: "https://gotundra.net"
+            # DB-backed sessions instead of the file handler -- with
+            # replicas: 2 and no ALB session affinity, each pod only sees
+            # its own local session files, so requests landing on the
+            # "wrong" pod look logged-out and bounce (the redirect loop /
+            # 429s on login). Table created by
+            # app/Database/Migrations/2026-09-20-080800_CreateSessionsTable.php.
+            - name: session.driver
+              value: "CodeIgniter\\Session\\Handlers\\Database\\MySQLiHandler"
+            - name: session.savePath
+              value: "ci_sessions"
+            - name: session.DBGroup
+              value: "default"
           envFrom:
             - configMapRef:
                 name: tundra-db-config       # DB_HOST, DB_PORT, DB_NAME — not sensitive
