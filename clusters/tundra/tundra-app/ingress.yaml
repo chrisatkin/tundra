@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: <cert-arn-from-module-11>
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:717189564438:certificate/78e5272a-7be8-4ef9-a39b-b3d73e54d7de"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     external-dns.alpha.kubernetes.io/hostname: gotundra.net
 spec:
